@@ -1,7 +1,6 @@
 module.exports = ({ env }) => ({
   upload: {
     config: {
-      jwtSecret: env("JWT_SECRET", "WSBD3ZObnLnhmJp267SolA=="),
       provider: "cloudinary",
       providerOptions: {
         cloud_name: env("CLOUDINARY_NAME"),
@@ -12,6 +11,11 @@ module.exports = ({ env }) => ({
         upload: {},
         delete: {},
       },
+    },
+  },
+  "users-permissions": {
+    config: {
+      jwtSecret: env("JWT_SECRET", "WSBD3ZObnLnhmJp267SolA=="),
     },
   },
   // ...
