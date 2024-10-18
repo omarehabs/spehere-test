@@ -471,10 +471,11 @@ export interface PluginUsersPermissionsUser
     >;
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     comments: Schema.Attribute.Relation<'oneToMany', 'api::comment.comment'>;
-    comment: Schema.Attribute.Relation<'oneToOne', 'api::comment.comment'>;
     image: Schema.Attribute.Media<'images'>;
     articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    userImage: Schema.Attribute.String;
+    bio: Schema.Attribute.Text;
+    expertise: Schema.Attribute.String;
+    location: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -513,10 +514,8 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
-    content: Schema.Attribute.Text;
-    imageURL: Schema.Attribute.String;
+    content: Schema.Attribute.Text & Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images'>;
-    imageDocumentId: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -547,8 +546,6 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    icon: Schema.Attribute.Media<'images' | 'files'> &
-      Schema.Attribute.Required;
     description: Schema.Attribute.String;
     articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
     createdAt: Schema.Attribute.DateTime;
@@ -578,12 +575,15 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    content: Schema.Attribute.String;
-    users_permissions_user: Schema.Attribute.Relation<
-      'oneToOne',
+    content: Schema.Attribute.String & Schema.Attribute.Required;
+    article: Schema.Attribute.Relation<'manyToOne', 'api::article.article'>;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
       'plugin::users-permissions.user'
     >;
-    article: Schema.Attribute.Relation<'manyToOne', 'api::article.article'>;
+    commented: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -618,6 +618,9 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    reviewed: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

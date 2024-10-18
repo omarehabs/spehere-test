@@ -74,13 +74,8 @@
     "comments": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::comment.comment"
-    },
-    "comment": {
-      "type": "relation",
-      "relation": "oneToOne",
       "target": "api::comment.comment",
-      "mappedBy": "users_permissions_user"
+      "mappedBy": "user"
     },
     "image": {
       "type": "media",
@@ -96,7 +91,13 @@
       "target": "api::article.article",
       "mappedBy": "user"
     },
-    "userImage": {
+    "bio": {
+      "type": "text"
+    },
+    "expertise": {
+      "type": "string"
+    },
+    "location": {
       "type": "string"
     }
   }

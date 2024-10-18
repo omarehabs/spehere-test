@@ -13,19 +13,25 @@
   "pluginOptions": {},
   "attributes": {
     "content": {
-      "type": "string"
-    },
-    "users_permissions_user": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "comment"
+      "type": "string",
+      "required": true
     },
     "article": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::article.article",
       "inversedBy": "comments"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "comments"
+    },
+    "commented": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

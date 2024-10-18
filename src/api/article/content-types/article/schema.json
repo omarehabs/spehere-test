@@ -35,7 +35,8 @@
       "mappedBy": "article"
     },
     "tags": {
-      "type": "json"
+      "type": "json",
+      "required": false
     },
     "category": {
       "type": "relation",
@@ -50,10 +51,8 @@
       "inversedBy": "articles"
     },
     "content": {
-      "type": "text"
-    },
-    "imageURL": {
-      "type": "string"
+      "type": "text",
+      "required": true
     },
     "image": {
       "type": "media",
@@ -62,9 +61,6 @@
       "allowedTypes": [
         "images"
       ]
-    },
-    "imageDocumentId": {
-      "type": "string"
     }
   }
 }
